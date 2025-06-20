@@ -1,0 +1,43 @@
+<script>
+  const colors = {
+  beige: {
+    name: "오트밀",
+    suffix: "", // 기본값 (뒤에 아무것도 안 붙음)
+      views: ["beige_front", "beige_side", "beige_back"]
+    },
+    black: {
+      name: "블랙",
+      suffix: "",
+      views: ["black_front", "black_side", "black_back"]
+    }
+  };
+  let currentColor = 'beige';
+  let currentIndex = 0;
+
+  function updateImage() {
+  const view = colors[currentColor].views[currentIndex];
+  const imageName = `${view}.jpg`;
+  document.getElementById('productImg').src = `https://raw.githubusercontent.com/LEADCOMMsupportme/Forme_V_bra /main/${imageName}`;
+  document.getElementById('colorName').innerText = colors[currentColor].name;
+}
+
+
+  function prevView() {
+    currentIndex = (currentIndex - 1 + 3) % 3;
+    updateImage();
+  }
+
+  function nextView() {
+    currentIndex = (currentIndex + 1) % 3;
+    updateImage();
+  }
+
+  function setColor(color, event) {
+    currentColor = color;
+    currentIndex = 0;
+    document.querySelectorAll('.color-dot').forEach(dot => dot.classList.remove('active'));
+    event.target.classList.add('active');
+    updateImage();
+  }
+</script>
+
